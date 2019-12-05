@@ -83,3 +83,9 @@ sudo reboot
 #3. terminal: rosrun rviz rviz
 #rviz select by topic
 #select in ->Global Options -> Fixed Frame : "/laser"
+
+
+#JOYSTICK
+sudo apt-get install ros-melodic-joy
+sudo apt-get install joystick
+
