@@ -18,3 +18,16 @@ grep -q -F ' ROS_MASTER_URI' ~/.bashrc ||  echo 'export ROS_MASTER_URI=http://lo
 rosdep update #takes a few minutes
 sudo apt-get install ros-melodic-tf2-geometry-msgs
 sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+
+
+#ZED
+cd ~/Downloads/
+wget https://download.stereolabs.com/zedsdk/2.8/jetson_jp42
+chmod +x jetson_jp42
+./jetson_jp42 #takes a few minute
+q #TODO q and Y and Enter key automatically
+
+#RACECAR
+
+
+
