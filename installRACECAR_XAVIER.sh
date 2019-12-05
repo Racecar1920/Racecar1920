@@ -10,7 +10,7 @@ cd installROSXavier/
 ./installROS.sh -p ros-melodic-desktop -p ros-melodic-rgbd-launch #takes a few minutes
 ./setupCatkinWorkspace.sh racecar_ws #takes a few minutes
 echo "source ~/racecar_ws/devel/setup.bash" >> ~/.bashrc
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+#source ros/melodic already done in installROS.sh
 source ~/racecar_ws/devel/setup.bash
 source /opt/ros/melodic/setup.bash
 grep -q -F ' ROS_IP' ~/.bashrc ||  echo "export ROS_IP=$(hostname -I)" | tee -a ~/.bashrc
@@ -45,5 +45,37 @@ rosdep update
 sudo apt-get install ros-melodic-ackermann-msgs
 catkin_make
 
+#LASER
+cd ~/racecar_ws/src
+mkdir autonomous_racecar
+cd autonomous_racecar
+mkdir laser
+cd laser
+git clone https://github.com/ros-drivers/urg_node.git
+git clone https://github.com/ros-drivers/urg_c.git
+sudo apt-get install ros-melodic-urg-node -y
+cd ~/racecar_ws/
+catkin_make
+sudo adduser xavier dialout
+sudo chmod a+rw /dev/ttyACM0
+rosparam set urg_node/calibrate_time false
+rosparam set urg_node/port /dev/ttyACM0
+sudo apt-get install ros-melodic-rosserial -y
+
+
 sudo reboot
 
+#ZED CAN be tested now with:
+#1. terminal: roscore
+#2. terminal: cd ~/racecar_ws/
+#2. terminal: roslaunch zed_wrapper zed.launch
+#3. terminal: rosrun rviz rviz
+#rviz select by topic 
+
+#LASER can be tested with:
+#1. terminal: roscore
+#2. terminal: cd ~/racecar_ws/
+#2. terminal: roslaunch urg_node urg_lidar.launch
+#3. terminal: rosrun rviz rviz
+#rviz select by topic
+#select in ->Global Options -> Fixed Frame : "/laser"
