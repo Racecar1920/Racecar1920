@@ -24,10 +24,26 @@ sudo apt install python-rosinstall python-rosinstall-generator python-wstool bui
 cd ~/Downloads/
 wget https://download.stereolabs.com/zedsdk/2.8/jetson_jp42
 chmod +x jetson_jp42
-./jetson_jp42 #takes a few minute
+./jetson_jp42 #takes a few minutes
 q #TODO q and Y and Enter key automatically
 
 #RACECAR
+cd ~/Downloads/
+git clone https://github.com/RacecarJ/installRACECARJ.git
+cd installRACECARJ/
+./scripts/installRACECARUdev.sh
+sudo apt update
+sudo apt upgrade -y #takes a few minutes
+sudo apt install python3-opencv -y
+cd ~/racecar_ws/
+wget -q https://raw.githubusercontent.com/racecarj/racecar/VESC6/racecar.rosinstall -O ~/racecar_ws/.rosinstall
+wstool update
+sudo apt-get install ros-melodic-serial
+sudo apt-get install libpcl1 ros-melodic-pcl-ros -y
+sudo apt-get install ros-melodic-ros-base
+rosdep update
+sudo apt-get install ros-melodic-ackermann-msgs
+catkin_make
 
-
+sudo reboot
 
