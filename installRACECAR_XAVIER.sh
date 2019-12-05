@@ -19,6 +19,7 @@ rosdep update #takes a few minutes
 sudo apt-get install ros-melodic-tf2-geometry-msgs
 sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
 
+exit 1
 
 #ZED
 cd ~/Downloads/
