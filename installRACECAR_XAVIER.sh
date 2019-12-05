@@ -19,7 +19,7 @@ rosdep update #takes a few minutes
 sudo apt-get install ros-melodic-tf2-geometry-msgs
 sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
 
-exit 1
+#exit 1
 
 #ZED
 cd ~/Downloads/
@@ -40,11 +40,11 @@ cd ~/racecar_ws/
 wget -q https://raw.githubusercontent.com/racecarj/racecar/VESC6/racecar.rosinstall -O ~/racecar_ws/.rosinstall
 wstool update
 sudo apt-get install ros-melodic-serial
-sudo apt-get install libpcl1 ros-melodic-pcl-ros -y
+sudo apt-get install libpcl1 ros-melodic-pcl-ros -y #takes a few minutes
 sudo apt-get install ros-melodic-ros-base
 rosdep update
 sudo apt-get install ros-melodic-ackermann-msgs
-catkin_make
+catkin_make #takes a few minutes
 
 #LASER
 cd ~/racecar_ws/src
@@ -56,9 +56,12 @@ git clone https://github.com/ros-drivers/urg_node.git
 git clone https://github.com/ros-drivers/urg_c.git
 sudo apt-get install ros-melodic-urg-node -y
 cd ~/racecar_ws/
-catkin_make
+catkin_make #takes a few minutes
 sudo adduser xavier dialout
-sudo chmod a+rw /dev/ttyACM0
+
+#connect Xavier with Laser!
+roscore in new terminal
+sudo chmod a+rw /dev/ttyACM0 
 rosparam set urg_node/calibrate_time false
 rosparam set urg_node/port /dev/ttyACM0
 sudo apt-get install ros-melodic-rosserial -y
